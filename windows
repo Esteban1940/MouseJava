@@ -1,0 +1,83 @@
+package visual;
+
+import java.awt.AWTException;
+import java.awt.Dimension;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class ventana extends JFrame implements ActionListener {
+
+	public static void main(String[] args) {
+		ventana V = new ventana();
+		V.setVisible(true);
+
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JButton boton;
+
+	public ventana() {
+		super();
+		configurarVentana();
+		inicializarComponentes();
+	}
+
+	private void configurarVentana() {
+		this.setTitle("Mouse");
+		this.setSize(310, 210);
+		this.setLocationRelativeTo(null);
+		this.setLayout(null);
+		this.setResizable(false);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	}
+
+	private void inicializarComponentes() {
+
+		boton = new JButton();
+		boton.setText("Mover mouse");
+		boton.setBounds(50, 100, 200, 30);
+		boton.addActionListener(this);
+		this.add(boton);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+		try {
+			JavaRobot();
+		} catch (AWTException e1) {
+
+			e1.printStackTrace();
+		}
+	}
+
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			System.exit(0);
+		}
+	}
+
+	public void JavaRobot() throws AWTException {
+		Robot robot = new Robot();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+		while (true) {
+
+			for (int j = 1500; j <1600; j++) {
+
+				robot.mouseMove(j, 0);
+				robot.delay(100);
+
+			}
+		}
+	}
+}
